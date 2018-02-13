@@ -11,13 +11,13 @@ public class StartWindow{
 
     public StartWindow(){
         gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        gui.setSize(1000, 1000);
+        gui.setSize(300, 300);
         gui.setLayout(new GridLayout(2, 2));
 
         single.setOpaque(true);
         single.setBackground(Color.CYAN);
-        single.setOpaque(true);
-        single.setBackground(Color.CYAN);
+        multi.setOpaque(true);
+        multi.setBackground(Color.CYAN);
         
         label1.setOpaque(true);
         label1.setBackground(Color.WHITE);

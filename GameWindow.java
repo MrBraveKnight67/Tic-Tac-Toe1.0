@@ -32,9 +32,9 @@ public class GameWindow{
         turn.setOpaque(true);
         turn.setBackground(Color.GREEN);
         exit.setOpaque(true);
-        exit.setBackground(Color.BLUE);
+        exit.setBackground(Color.CYAN);
         restart.setOpaque(true);
-        restart.setBackground(Color.BLUE);
+        restart.setBackground(Color.CYAN);
         addListeners();
 
         gui.add(exit);

@@ -31,42 +31,43 @@ public class Board{
             cells[r][c] = 0;
         }
     }
-    
+
     public boolean checkEmpty(int r, int c){
         if(cells[r][c] == emptyMarker){
             return true;
         }
         return false;
     }
+    
+    public boolean checkFull(){
+        for(int[] v1 : cells){
+            for(int v2 : v1){
+                if(v2 != emptyMarker) return false;
+            }
+        }
+        return true;
+    }
 
     public int checkWinners(){
         int checkFor = cells[0][0];
-        int tempCtn = 0;
-
         for(int i = 1; i < cells.length; i++){
             if(cells[i][i] != checkFor){
                 break;
             }
-            tempCtn++;
+            if(i == cells.length - 1){
+                return checkFor;
+            }
         }
-
-        if(tempCtn == cells.length){
-            return checkFor;
-        }
-        tempCtn = 0;
 
         checkFor = cells[cells.length-1][0];
         for(int i = 1; i < cells.length; i++){
-            if(cells[cells.length - i][i] != checkFor){
+            if(cells[cells.length - i - 1][i] != checkFor){
                 break;
             }
-            tempCtn++;
+            if(i == cells.length - 1){
+                return checkFor;
+            }
         }
-
-        if(tempCtn == cells.length){
-            return checkFor;
-        }
-        tempCtn = 0;
 
         for(int r = 0; r < cells.length; r++){
             checkFor = cells[r][0];
@@ -74,14 +75,11 @@ public class Board{
                 if(cells[r][c] != checkFor){
                     break;
                 }
-                tempCtn++;
+                if(c == cells.length - 1){
+                    return checkFor;
+                }
             }
         }
-
-        if(tempCtn == cells.length){
-            return checkFor;
-        }
-        tempCtn = 0;
 
         for(int c = 0; c < cells.length; c++){
             checkFor = cells[0][c];
@@ -89,14 +87,11 @@ public class Board{
                 if(cells[r][c] != checkFor){
                     break;
                 }
-                tempCtn++;
+                if(r == cells.length - 1){
+                    return checkFor;
+                }
             }
         }
-
-        if(tempCtn == cells.length){
-            return checkFor;
-        }
-        tempCtn = 0;
 
         return -1;
     }

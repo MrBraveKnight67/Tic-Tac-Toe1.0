@@ -11,13 +11,9 @@ public class ResultWindow{
     
     public ResultWindow(int res){
         gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        gui.setSize(1000, 1000);
+        gui.setSize(300, 300);
         gui.setLayout(new GridLayout(2, 2));
         
-        label1.setOpaque(true);
-        label1.setBackground(Color.WHITE);
-        label2.setOpaque(true);
-        label2.setBackground(Color.WHITE);
         if(res == 1){
             label1 = new JButton("Player X");
         }else if(res == 0){
@@ -26,11 +22,15 @@ public class ResultWindow{
             label1 = new JButton("The game");
             label2 = new JButton("was ended.");
         }
+        label1.setOpaque(true);
+        label1.setBackground(Color.WHITE);
+        label2.setOpaque(true);
+        label2.setBackground(Color.WHITE);
         
         exit.setOpaque(true);
-        exit.setBackground(Color.BLUE);
+        exit.setBackground(Color.CYAN);
         restart.setOpaque(true);
-        restart.setBackground(Color.BLUE);
+        restart.setBackground(Color.CYAN);
         addListeners();
 
         gui.add(label1);
