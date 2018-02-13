@@ -1,32 +1,39 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Board{
-
-    private int emptyMarker = -1;
+    private int emptyMarker;
+    private int size;
     private int[][] cells;
 
-    public Board(int boardSize){
-        int[][] cells = new int[boardSize][boardSize];
-        for(int i = 0; i < boardSize; i++){
+    public Board(){
+        size = Game.boardSize;
+        emptyMarker = Game.emptyMarker;
+
+        cells = new int[size][size];
+        for(int i = 0; i < size; i++){
             Arrays.fill(cells[i], emptyMarker);
         }
     }
-    
+
     public int getCell(int r, int c){
         return cells[r][c];
     }
 
-    public boolean putX(int r, int c){
+    public void putX(int r, int c){
         if(cells[r][c] == emptyMarker){
             cells[r][c] = 1;
-            return true;
         }
-        return false;
     }
 
-    public boolean putO(int r, int c){
+    public void putO(int r, int c){
         if(cells[r][c] == emptyMarker){
             cells[r][c] = 0;
+        }
+    }
+    
+    public boolean checkEmpty(int r, int c){
+        if(cells[r][c] == emptyMarker){
             return true;
         }
         return false;
@@ -35,27 +42,27 @@ public class Board{
     public int checkWinners(){
         int checkFor = cells[0][0];
         int tempCtn = 0;
-        
+
         for(int i = 1; i < cells.length; i++){
             if(cells[i][i] != checkFor){
                 break;
             }
             tempCtn++;
         }
-        
+
         if(tempCtn == cells.length){
             return checkFor;
         }
         tempCtn = 0;
-        
-        checkFor = cells[cells.length][0];
+
+        checkFor = cells[cells.length-1][0];
         for(int i = 1; i < cells.length; i++){
             if(cells[cells.length - i][i] != checkFor){
                 break;
             }
             tempCtn++;
         }
-        
+
         if(tempCtn == cells.length){
             return checkFor;
         }
@@ -67,10 +74,10 @@ public class Board{
                 if(cells[r][c] != checkFor){
                     break;
                 }
-            tempCtn++;
+                tempCtn++;
             }
         }
-        
+
         if(tempCtn == cells.length){
             return checkFor;
         }
@@ -82,15 +89,15 @@ public class Board{
                 if(cells[r][c] != checkFor){
                     break;
                 }
-            tempCtn++;
+                tempCtn++;
             }
         }
-        
+
         if(tempCtn == cells.length){
             return checkFor;
         }
         tempCtn = 0;
-        
+
         return -1;
     }
 }

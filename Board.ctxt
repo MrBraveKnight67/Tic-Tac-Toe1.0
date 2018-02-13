@@ -1,13 +1,15 @@
 #BlueJ class context
 comment0.target=Board
-comment1.params=boardSize
-comment1.target=Board(int)
+comment1.params=
+comment1.target=Board()
 comment2.params=r\ c
 comment2.target=int\ getCell(int,\ int)
 comment3.params=r\ c
-comment3.target=boolean\ putX(int,\ int)
+comment3.target=void\ putX(int,\ int)
 comment4.params=r\ c
-comment4.target=boolean\ putO(int,\ int)
-comment5.params=
-comment5.target=int\ checkWinners()
-numComments=6
+comment4.target=void\ putO(int,\ int)
+comment5.params=r\ c
+comment5.target=boolean\ checkEmpty(int,\ int)
+comment6.params=
+comment6.target=int\ checkWinners()
+numComments=7
