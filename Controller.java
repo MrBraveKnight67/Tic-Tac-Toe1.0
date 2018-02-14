@@ -14,7 +14,7 @@ public class Controller{
     }
 
     public void click(int r, int c){
-        okClick = Game.board.getCell(r, c) == Game.emptyMarker;
+        okClick = (Game.board.getCell(r, c) == Game.emptyMarker);
         if(finished){
             Game.end(-1);
         }
@@ -42,9 +42,8 @@ public class Controller{
 
     public void aiClick(){
         if(finished){
-            Game.end(-1);
-        }
-        if(!finished && okClick){
+            Game.end(Game.board.checkWinners());
+        }else if(okClick){
             wait = true;
             Random rng = new Random();
             int r = rng.nextInt(Game.boardSize);
