@@ -13,15 +13,15 @@ public class CellListener implements ActionListener{
         for(int r = 0; r < btns.length; r++){
             if(finished) break;
             for(int c = 0; c < btns[0].length; c++){
-                if(e.getSource() == btns[r][c] && Game.board.checkEmpty(r, c)){
-                    Game.controller.click(r, c);
+                if(e.getSource() == btns[r][c] && Game.board.empty(r, c)){
+                    Game.controller.safeClick(r, c);
                     finished = true;
+                    if(Game.mode == 1){
+                        Game.controller.safeClick();
+                    }
                     break;
                 }
             }
-        }
-        if(Game.mode == 1){
-            Game.controller.aiClick();
         }
         finished = false;
     }

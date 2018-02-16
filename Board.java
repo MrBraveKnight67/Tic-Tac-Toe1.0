@@ -16,10 +16,6 @@ public class Board{
         }
     }
 
-    public int getCell(int r, int c){
-        return cells[r][c];
-    }
-
     public void putX(int r, int c){
         if(cells[r][c] == emptyMarker){
             cells[r][c] = 1;
@@ -32,17 +28,17 @@ public class Board{
         }
     }
 
-    public boolean checkEmpty(int r, int c){
+    public boolean empty(int r, int c){
         if(cells[r][c] == emptyMarker){
             return true;
         }
         return false;
     }
-    
-    public boolean checkFull(){
-        for(int[] v1 : cells){
-            for(int v2 : v1){
-                if(v2 != emptyMarker) return false;
+
+    public boolean full(){
+        for(int r = 0; r < size; r++){
+            for(int c = 0; c < size; c++){
+                if(empty(r, c)) return false;
             }
         }
         return true;

@@ -1,5 +1,5 @@
 public class Game{
-    static int boardSize = 7;
+    static int boardSize = 5;
     static int emptyMarker = -1;
 
     public static Board board;
