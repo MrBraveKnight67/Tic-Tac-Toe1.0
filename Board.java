@@ -3,29 +3,91 @@ import java.util.Random;
 
 public class Board{
     private int emptyMarker;
+    private int tiedLineMarker;
     private int size;
     private int[][] cells;
+    public int[] rowTotal, colTotal, diagTotal;
 
     public Board(){
         size = Game.boardSize;
-        emptyMarker = Game.emptyMarker;
+        emptyMarker = Game.emptyCellMarker;
+        tiedLineMarker = Game.tiedLineMarker;
 
         cells = new int[size][size];
         for(int i = 0; i < size; i++){
             Arrays.fill(cells[i], emptyMarker);
         }
+
+        rowTotal = new int[size];
+        colTotal = new int[size];
+        diagTotal = new int[2];
     }
 
-    public void putX(int r, int c){
-        if(cells[r][c] == emptyMarker){
-            cells[r][c] = 1;
+    public void recordX(int r, int c){
+        cells[r][c] = 1;
+        if(rowTotal[r] != tiedLineMarker){
+            if(rowTotal[r] < 0){
+                rowTotal[r] = tiedLineMarker;
+            }else{
+                rowTotal[r]++;
+            }
+        }
+        if(colTotal[c] != tiedLineMarker){
+            if(colTotal[c] < 0){
+                colTotal[c] = tiedLineMarker;
+            }else{
+                colTotal[c]++;
+            }
+        }
+        if(r == c && diagTotal[0] != tiedLineMarker){
+            if(diagTotal[0] < 0){
+                diagTotal[0] = tiedLineMarker;
+            }else{
+                diagTotal[0]++;
+            }
+        }
+        if(r == Game.boardSize - c - 1 && diagTotal[1] != tiedLineMarker){
+            if(diagTotal[1] < 0){
+                diagTotal[1] = tiedLineMarker;
+            }else{
+                diagTotal[1]++;
+            }
         }
     }
 
-    public void putO(int r, int c){
-        if(cells[r][c] == emptyMarker){
-            cells[r][c] = 0;
+    public void recordO(int r, int c){
+        cells[r][c] = 0;
+        if(rowTotal[r] != tiedLineMarker){
+            if(rowTotal[r] > 0){
+                rowTotal[r] = tiedLineMarker;
+            }else{
+                rowTotal[r]--;
+            }
         }
+        if(colTotal[c] != tiedLineMarker){
+            if(colTotal[c] > 0){
+                colTotal[c] = tiedLineMarker;
+            }else{
+                colTotal[c]--;
+            }
+        }
+        if(r == c && diagTotal[0] != tiedLineMarker){
+            if(diagTotal[0] > 0){
+                diagTotal[0] = tiedLineMarker;
+            }else{
+                diagTotal[0]--;
+            }
+        }
+        if(r == Game.boardSize - c - 1 && diagTotal[1] != tiedLineMarker){
+            if(diagTotal[1] > 0){
+                diagTotal[1] = tiedLineMarker;
+            }else{
+                diagTotal[1]--;
+            }
+        }
+        System.out.println(Arrays.toString(rowTotal));
+        System.out.println(Arrays.toString(colTotal));
+        System.out.println(Arrays.toString(diagTotal));
     }
 
     public boolean empty(int r, int c){
@@ -43,52 +105,20 @@ public class Board{
         }
         return true;
     }
-
+    
     public int checkWinners(){
-        int checkFor = cells[0][0];
-        for(int i = 1; i < cells.length; i++){
-            if(cells[i][i] != checkFor){
-                break;
-            }
-            if(i == cells.length - 1){
-                return checkFor;
-            }
+        for(int n : rowTotal){
+            if(n == size) return 1;
+            if(n == -size) return 0;
         }
-
-        checkFor = cells[cells.length-1][0];
-        for(int i = 1; i < cells.length; i++){
-            if(cells[cells.length - i - 1][i] != checkFor){
-                break;
-            }
-            if(i == cells.length - 1){
-                return checkFor;
-            }
+        for(int n : colTotal){
+            if(n == size) return 1;
+            if(n == -size) return 0;
         }
-
-        for(int r = 0; r < cells.length; r++){
-            checkFor = cells[r][0];
-            for(int c = 0; c < cells.length; c++){
-                if(cells[r][c] != checkFor){
-                    break;
-                }
-                if(c == cells.length - 1){
-                    return checkFor;
-                }
-            }
+        for(int n : diagTotal){
+            if(n == size) return 1;
+            if(n == -size) return 0;
         }
-
-        for(int c = 0; c < cells.length; c++){
-            checkFor = cells[0][c];
-            for(int r = 0; r < cells.length; r++){
-                if(cells[r][c] != checkFor){
-                    break;
-                }
-                if(r == cells.length - 1){
-                    return checkFor;
-                }
-            }
-        }
-
         return -1;
     }
 }

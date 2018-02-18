@@ -11,65 +11,33 @@ public class Controller{
         finished = false;
     }
 
-    public void safeClick(int r, int c){
+    public boolean safeClick(int r, int c){
         if(Game.board.full()){
             Game.end(Game.board.checkWinners());
-        }else{
+        }else if (Game.board.empty(r, c)){
             click(r, c);
             int winner = Game.board.checkWinners();
-            if(winner == 1){
-                finished = true;
-                Game.end(1);
-            }else if(winner == 0){
-                finished = true;
-                Game.end(0);
+            if(winner != -1){
+                Game.end(winner);
             }else{
                 player1 = !player1;
                 Game.gameW.showTurn(player1);
+                if(Game.mode == 1 && !player1){
+                    AI.smartTurn();
+                }
             }
+            return true;
         }
-    }
-
-    public void safeClick(){
-        wait = true;
-        if(Game.board.full()){
-            Game.end(Game.board.checkWinners());
-        }else{
-            aiClick();
-            int winner = Game.board.checkWinners();
-            if(winner == 1){
-                finished = true;
-                Game.end(1);
-            }else if(winner == 0){
-                finished = true;
-                Game.end(0);
-            }else{
-                player1 = !player1;
-                Game.gameW.showTurn(player1);
-            }
-        }
-        wait = false;
+        return false;
     }
 
     public void click(int r, int c){
         if(player1){
-            Game.board.putX(r, c);
+            Game.board.recordX(r, c);
             Game.gameW.showX(r, c);
         }else{
-            Game.board.putO(r, c);
+            Game.board.recordO(r, c);
             Game.gameW.showO(r, c);
         }
-    }
-
-    public void aiClick(){
-        Random rng = new Random();
-        int r = rng.nextInt(Game.boardSize);
-        int c = rng.nextInt(Game.boardSize);
-        while(!Game.board.empty(r, c)){
-            r = rng.nextInt(Game.boardSize);
-            c = rng.nextInt(Game.boardSize);
-        }
-        Game.board.putO(r, c);
-        Game.gameW.showO(r, c);
     }
 }

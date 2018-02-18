@@ -1,6 +1,7 @@
 public class Game{
     static int boardSize = 5;
-    static int emptyMarker = -1;
+    static int emptyCellMarker = -1;
+    static final int tiedLineMarker = boardSize+1;
 
     public static Board board;
     public static GameWindow gameW;
