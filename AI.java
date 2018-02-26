@@ -85,7 +85,7 @@ public class AI{
         maxDiag[1] = Math.abs(Game.board.diagTotal[0]);
         if(maxDiag[1] == tied) maxDiag[1] = 0;
         int temp = Math.abs(Game.board.diagTotal[1]);
-        if(temp !=tied && maxCol[1] < temp){
+        if(temp != tied && maxCol[1] < temp){
             maxCol[0] = 1;
             maxCol[1] = temp;
         }
