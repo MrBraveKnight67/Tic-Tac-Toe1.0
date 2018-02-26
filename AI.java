@@ -28,12 +28,13 @@ public class AI{
                     n = rng.nextInt(Game.boardSize);
                 }
                 Game.controller.safeClick(n, n);
+            }else if(max[1] == 1){
+                System.out.println("DIAG2;; // first: " + n + " // second: " + n);
+                while(!Game.board.empty(n, Game.boardSize - n - 1)){
+                    n = rng.nextInt(Game.boardSize);
+                }
+                Game.controller.safeClick(n, Game.boardSize - n - 1);
             }
-            System.out.println("DIAG2;; // first: " + n + " // second: " + n);
-            while(!Game.board.empty(n, Game.boardSize - n - 1)){
-                n = rng.nextInt(Game.boardSize);
-            }
-            Game.controller.safeClick(n, Game.boardSize - n - 1);
         }else if(max[0] == -1){
             System.out.println("rdm");
             randomTurn();
@@ -53,6 +54,7 @@ public class AI{
     }
 
     private static int[] findMax(){
+        System.out.println("===========in AI:");
         int tied = Game.tiedLineMarker;
         int[] maxRow, maxCol, maxDiag;
         /*
@@ -74,6 +76,9 @@ public class AI{
         maxCol[0] = 0;
         for(int c = 0; c < Game.boardSize; c++){
             int temp = Math.abs(Game.board.colTotal[c]);
+            System.out.println();
+            System.out.print("COLUMN " + c + " IS CURRENTLY " + temp);
+            System.out.println();
             if(temp != tied && maxCol[1] < temp){
                 maxCol[0] = c;
                 maxCol[1] = temp;
@@ -89,8 +94,7 @@ public class AI{
             maxCol[0] = 1;
             maxCol[1] = temp;
         }
-        
-        System.out.println("===========in AI:");
+
         System.out.println(Arrays.toString(maxRow));
         System.out.println(Arrays.toString(maxCol));
         System.out.println(Arrays.toString(maxDiag));
@@ -101,6 +105,7 @@ public class AI{
          * max[1] = the line
          */
         int finalMaxV = Math.max(Math.max(maxRow[1], maxCol[1]), maxDiag[1]);
+        System.out.println("finalMaxV: " + finalMaxV);
         if(finalMaxV == maxRow[1]){
             max[0] = 0;
             max[1] = maxRow[0];

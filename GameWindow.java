@@ -70,6 +70,7 @@ public class GameWindow{
     }
 
     public void showX(int r, int c){
+        System.out.println("SHOWING X");
         btns[r][c].setText("X");
         btns[r][c].setBackground(Color.GREEN);
     }
