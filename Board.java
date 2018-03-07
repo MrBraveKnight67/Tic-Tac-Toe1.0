@@ -85,9 +85,6 @@ public class Board{
                 diagTotal[1]--;
             }
         }
-        System.out.println(Arrays.toString(rowTotal));
-        System.out.println(Arrays.toString(colTotal));
-        System.out.println(Arrays.toString(diagTotal));
     }
 
     public boolean empty(int r, int c){
@@ -118,6 +115,9 @@ public class Board{
         for(int n : diagTotal){
             if(n == size) return 1;
             if(n == -size) return 0;
+        }
+        if(full()){
+            return 3;
         }
         return -1;
     }

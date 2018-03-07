@@ -8,25 +8,31 @@ public class ResultWindow{
     private JButton restart = new JButton("restart");
     private JButton label1;
     private JButton label2 = new JButton("Won!!!");
-    
+
     public ResultWindow(int res){
         gui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         gui.setSize(300, 300);
         gui.setLayout(new GridLayout(2, 2));
-        
+
         if(res == 1){
             label1 = new JButton("Player X");
+            label1.setBackground(Color.GREEN);
         }else if(res == 0){
             label1 = new JButton("Player O");
+            label1.setBackground(Color.RED);
         }else if(res == -1){
             label1 = new JButton("The game");
             label2 = new JButton("was ended.");
+            label1.setBackground(Color.WHITE);
+        }else if(res == 3){
+            label1 = new JButton("The game");
+            label2 = new JButton("was tied.");
+            label1.setBackground(Color.WHITE);
         }
         label1.setOpaque(true);
-        label1.setBackground(Color.WHITE);
         label2.setOpaque(true);
         label2.setBackground(Color.WHITE);
-        
+
         exit.setOpaque(true);
         exit.setBackground(Color.CYAN);
         restart.setOpaque(true);

@@ -16,14 +16,12 @@ public class Controller{
             Game.end(Game.board.checkWinners());
         }else if (Game.board.empty(r, c)){
             click(r, c);
-            System.out.println("Clicked: " + r + ", " + c);
             int winner = Game.board.checkWinners();
-            if(winner != -1){
+            if(winner != -1 || Game.board.full()){
                 Game.end(winner);
             }else{
                 player1 = !player1;
                 Game.gameW.showTurn(player1);
-                System.out.println("Next Player is Player1/Human: " + player1);
                 if(Game.mode == 1 && !player1){
                     AI.smartTurn();
                 }
