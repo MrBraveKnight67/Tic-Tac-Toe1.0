@@ -1,5 +1,5 @@
 public class Game{
-    static int boardSize = 5;
+    static int boardSize = 3;
     static int emptyCellMarker = -1;
     static final int tiedLineMarker = boardSize+1;
 
